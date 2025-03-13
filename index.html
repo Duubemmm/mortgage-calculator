@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mortgage Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <!-- Calculator Section -->
+      <section class="calculator-section" aria-labelledby="calculator-heading">
+        <div class="calculator-section-header">
+          <h2 id="calculator-heading">Mortgage Calculator</h2>
+          <button aria-label="Clear All" class="clear-button">Clear All</button>
+        </div>
+        <form id="mortgage-form">
+          <!-- Mortgage Amount -->
+          <div class="form-group">
+            <div class="input-field">
+              <label for="mortgage-amount">Mortgage Amount</label>
+              <div class="input-container">
+                <div class="input-symbol" aria-hidden="true">$</div>
+                <input
+                  type="text"
+                  id="mortgage-amount"
+                  name="mortgage-amount"
+                  aria-label="Mortgage Amount"
+                />
+              </div>
+              <span class="mortgage-amount-error"></span>
+            </div>
+
+            <!-- Mortgage Term and Interest Rate -->
+            <div class="input-row">
+              <div class="input-column">
+                <label for="mortgage-term">Mortgage Term</label>
+                <div class="input-container">
+                  <input
+                    type="text"
+                    id="mortgage-term"
+                    name="mortgage-term"
+                    aria-label="Mortgage Term"
+                  />
+                  <div class="input-term" aria-hidden="true">years</div>
+                </div>
+                <span class="mortgage-term-error"></span>
+              </div>
+              <div class="input-column">
+                <label for="interest-rate">Interest Rate</label>
+                <div class="input-container">
+                  <input
+                    type="text"
+                    id="interest-rate"
+                    name="interest-rate"
+                    aria-label="Interest Rate"
+                  />
+                  <div class="input-symbol" aria-hidden="true">%</div>
+                </div>
+                <span class="interest-rate-error"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mortgage Type -->
+          <div class="form-group1">
+            <fieldset>
+              <legend>Mortgage Type</legend>
+              <div class="radio-container">
+                <label class="radio-box">
+                  <input
+                    type="radio"
+                    id="repayment"
+                    name="mortgage-type"
+                    value="repayment"
+                    aria-label="Repayment"
+                  />
+                  <span>Repayment</span>
+                </label>
+                <label class="radio-box">
+                  <input
+                    type="radio"
+                    id="interest-only"
+                    name="mortgage-type"
+                    value="interest-only"
+                    aria-label="Interest Only"
+                  />
+                  <span>Interest Only</span>
+                </label>
+              </div>
+            </fieldset>
+            <span class="mortgage-type-error"></span>
+          </div>
+        </form>
+
+        <!-- Calculate Button -->
+        <div class="calculate-button">
+          <img src="Images/icon-calculator.svg" alt="Calculator Icon" />
+          <button type="submit" aria-label="Calculate Repayments">
+            Calculate Repayment
+          </button>
+        </div>
+      </section>
+
+      <!-- Result Section -->
+      <section class="result-section" aria-labelledby="result-heading">
+        <img
+          src="Images/illustration-empty.svg"
+          alt="Illustration of empty results"
+        />
+        <h2 id="result-heading">Results shown here</h2>
+        <p>
+          Complete the form and click 'calculate repayments' to see what your
+          monthly repayments would be.
+        </p>
+        <div>
+          <h3></h3>
+          <h1 id="monthly-repayment"></h1>
+        </div>
+      </section>
+
+      <!-- Display Result Section -->
+      <section
+        class="displayresult-section"
+        aria-labelledby="display-result-heading"
+      ></section>
+    </main>
+    <script src="main.js"></script>
+  </body>
+</html>
