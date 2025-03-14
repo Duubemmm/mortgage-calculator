@@ -10,7 +10,6 @@ const mortgageTermError = document.querySelector(".mortgage-term-error");
 const interestRateError = document.querySelector(".interest-rate-error");
 const mortgageTypeError = document.querySelector(".mortgage-type-error");
 
-
 calculateButton.addEventListener("click", calculateRepayment);
 
 function calculateRepayment(event) {
@@ -28,35 +27,55 @@ function calculateRepayment(event) {
   let isValid = true;
 
   if (!mortgageAmountValue) {
-    showError(mortgageAmountError, "This field is required.");
+    showError(
+      mortgageAmountError, "This field is required.",
+      mortgageAmount,
+      mortgageAmount.closest(".input-container"));
     isValid = false;
   } else if (!isValidNumber(mortgageAmountValue)) {
-    showError(mortgageAmountError, "Please enter a valid number.");
+    showError(
+      mortgageAmountError, "Please enter a valid number.",
+      mortgageAmount,
+      mortgageAmount.closest(".input-container"));
     isValid = false;
   } else if (parseFloat(mortgageAmountValue) <= 0) {
-    showError(mortgageAmountError, "Please enter a positive number.");
+    showError(mortgageAmountError, "Please enter a positive number.",
+      mortgageAmount,
+      mortgageAmount.closest(".input-container"));
     isValid = false;
   }
 
   if (!mortgageTermValue) {
-    showError(mortgageTermError, "This field is required.");
+    showError(mortgageTermError, "This field is required.",
+      mortgageTerm,
+      mortgageTerm.closest(".input-container"));
     isValid = false;
   } else if (!isValidNumber(mortgageTermValue)) {
-    showError(mortgageTermError, "Please enter a valid number.");
+    showError(mortgageTermError, "Please enter a valid number.",
+      mortgageTerm,
+      mortgageTerm.closest(".input-container"));
     isValid = false;
   } else if (parseFloat(mortgageTermValue) <= 0) {
-    showError(mortgageTermError, "Please enter a positive number.");
+    showError(mortgageTermError, "Please enter a positive number.",
+      mortgageTerm,
+      mortgageTerm.closest(".input-container"));
     isValid = false;
   }
 
   if (!interestRateValue) {
-    showError(interestRateError, "This field is required.");
+    showError(interestRateError, "This field is required.",
+      interestRate,
+      interestRate.closest(".input-container"));
     isValid = false;
   } else if (!isValidNumber(interestRateValue)) {
-    showError(interestRateError, "Please enter a valid number.");
+    showError(interestRateError, "Please enter a valid number.",
+      interestRate,
+      interestRate.closest(".input-container"));
     isValid = false;
   } else if (parseFloat(interestRateValue) <= 0) {
-    showError(interestRateError, "Please enter a positive number.");
+    showError(interestRateError, "Please enter a positive number.",
+      interestRate,
+      interestRate.closest(".input-container"));
     isValid = false;
   }
 
@@ -87,9 +106,9 @@ function calculateRepayment(event) {
             <p>Your results are shown below based on the information you provided. To adjust the results, edit the form and click 'calculate repayments' again.</p>
             <div class="monthlypayment-div">
                 <p>Your monthly repayments</p>
-                <h1>$${monthlyRepayment}</h1>
-                <p>Your total repayments during the entire mortgage term</p>
-                <h2 id="display-monthly-repayment">$${totalRepayment}</h2>
+                <h1>$${monthlyRepayment.toFixed(3)}</h1>
+                <p>Total you'll repay over the term</p>
+                <h2 id="display-monthly-repayment">$${totalRepayment.toFixed(3)}</h2>
             </div>
         </div>`;
   } else if (mortgageType === "interest-only") {
@@ -108,9 +127,9 @@ function calculateRepayment(event) {
         <p>Your results are shown below based on the information you provided. To adjust the results, edit the form and click 'calculate repayments' again.</p>
         <div class="monthlypayment-div">
             <p>Your monthly Interest</p>
-            <h1>$${monthlyInterest}</h1>
-            <p>Your total repayments during the entire mortgage term</p>
-            <h2 id="display-monthly-repayment">$${totalInterest}</h2>
+            <h1>$${monthlyInterest.toFixed(3)}</h1>
+            <p>Total you'll repay over the term</p>
+            <h2 id="display-monthly-repayment">$${totalInterest.toFixed(3)}</h2>
         </div>
     </div>`;
   }
@@ -152,16 +171,59 @@ function clearValueButton() {
   resultSection.style.display = "block";
 }
 
-function showError(errorElement, message) {
+function showError(errorElement, message, inputElement, containerElement) {
     errorElement.textContent = message;
+
+    if (inputElement) {
+      inputElement.style.borderColor = "red";
+    }
+  
+    if (containerElement) {
+      containerElement.style.borderColor = "red";
   }
+
+  const inputSymbol = containerElement?.querySelector(".input-symbol");
+  const inputTerm = containerElement?.querySelector(".input-term");
+
+  if (inputSymbol) {
+    inputSymbol.style.background = "red";
+    inputSymbol.style.color = "white";
+  }
+
+  if (inputTerm) {
+    inputTerm.style.background = "red";
+    inputTerm.style.color = "white";
+  }
+}
   
   function clearErrors() {
     mortgageAmountError.textContent = "";
     mortgageTermError.textContent = "";
     interestRateError.textContent = "";
     mortgageTypeError.textContent = "";
-  }
+
+  const inputContainers = document.querySelectorAll(".input-container");
+  inputContainers.forEach(container => {
+    container.style.borderColor = ""; // Reset to default
+  
+
+  const inputSymbol = container.querySelector(".input-symbol");
+  const inputTerm = container.querySelector(".input-term");
+
+  if (inputSymbol) {
+      inputSymbol.style.borderColor = "";
+    }
+
+    if (inputTerm) {
+      inputTerm.style.borderColor = "";
+    }
+  });
+
+  const inputFields = document.querySelectorAll("input");
+  inputFields.forEach(input => {
+    input.style.borderColor = ""; // Reset to default
+  });
+}
   
   function isValidNumber(value) {
     return !isNaN(value) && isFinite(value);

@@ -21,8 +21,6 @@
 }
 
 body{
-    font-size: 16px;
-    font-weight: 500;
     background-color: var(--Slate-300-);
     height:100vh;
     font-family: "Plus Jakarta Sans", sans-serif;
@@ -30,7 +28,7 @@ body{
 
 main{
     display: flex;
-    border-radius: 10px;
+    border-radius: 20px;
     width: 80%;
     height:80vh;
     margin: 4rem auto;
@@ -38,7 +36,7 @@ main{
 }
 
 .calculator-section{
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: var(--White-);
     width:50%;
     padding: 1.2rem;
@@ -111,15 +109,10 @@ main{
     align-items: center;
 }
 
-.form-group {
-    width: 100%; 
-}
-
 .input-row {
     display: flex;
     justify-content: space-between; 
     gap: 20px; 
-
 }
 
 .input-column {
@@ -139,9 +132,8 @@ input[type="text"] {
 .input-field {
     margin-bottom: 0.5rem; }
 
-/* Ensure Mortgage Term and Interest Rate inputs are aligned */
 .input-row .input-column .input-container {
-    width: 100%; /* Make input containers take full width of their columns */
+    width: 100%; 
 }
 
 fieldset{
@@ -173,13 +165,11 @@ fieldset{
         background-color: var(--Lime-active-);
     }
 
-    /* Style the .input-container border when active or focused */
-.input-container:active,
+    .input-container:active,
 .input-container:focus-within {
     border: 1px solid var(--Lime-);
 }
 
-/* Style the .input-symbol and .input-term background color when active */
 .input-symbol:active,
 .input-term:active,
 .input-container:focus-within .input-symbol,
@@ -188,7 +178,6 @@ fieldset{
     border-color: var(--Lime-); /* Optional: Change border color if needed */
 }
 
-/* Style the radio button's circular border and dot */
 .radio-box input[type="radio"] {
     appearance: none; /* Remove default styling */
     width: 16px;
@@ -200,18 +189,11 @@ fieldset{
     transition: border-color 0.3s ease;
 }
 
-/* Change the radio button's border color when active or focused */
-.radio-box input[type="radio"]:active,
-.radio-box input[type="radio"]:focus {
-    border-color: var(--Lime-);
-    background-color: var(--Lime-active-);
-}
-
-/* Change the radio button's dot and border color when checked */
 .radio-box input[type="radio"]:checked {
     border-color: var(--Lime-);
     background-color: var(--Lime-);
 }
+
     .calculate-button{
         background-color: var(--Lime-);
         border: none;
@@ -248,6 +230,8 @@ fieldset{
     width: 50%;
     padding: 3rem;
     border-bottom-left-radius: 50px;  
+    border-bottom-right-radius: 20px;  
+    border-top-right-radius: 20px ;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -271,7 +255,45 @@ fieldset{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; 
+    justify-items: center; 
+    padding: 1rem;
+}
+
+.repaymentdisplayresult p{
+    color: var(--Slate-300-);
+    margin-top: 10px;
+    line-height: 1.5em;
+    word-spacing: 0.5em;
+}
+
+.repaymentdisplayresult h1{
+    color: var(--Lime-);
+    font-size: 30px;
+    font-weight: 900;
+    border-bottom: 1px solid var(--Slate-300-);
+    padding: 0.3rem;
+}
+
+#display-monthly-repayment{
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--White-);
+    margin-top: 10px;
+}
+
+.interestdisplayresult h1{
+    color: var(--Lime-);
+    font-size: 30px;
+    font-weight: 900;
+    border-bottom: 1px solid var(--Slate-300-);
+    padding: 0.3rem;
+}
+
+.interestdisplayresult p{
+    color: var(--Slate-300-);
+    margin-top: 10px;
+    line-height: 1.5em;
+    word-spacing: 0.5em;
 }
 
 .interestdisplayresult{
@@ -282,7 +304,8 @@ fieldset{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; 
+    justify-items: center; 
+    padding: 1rem;
 }
 
 #display-result-heading{
@@ -311,8 +334,6 @@ fieldset{
     font-size: 12px;
 }
 
-
-
 @media screen and (max-width: 768px) {
     main {
       flex-direction: column; /* Stack calculator and result sections */
@@ -327,6 +348,6 @@ fieldset{
     .result-section {
       width: 100%; /* Full width */
       border-radius: 0; /* Remove border radius */
-    }
-    
+    } 
 }
+
