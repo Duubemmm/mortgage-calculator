@@ -90,20 +90,19 @@ main{
     width: 30px;
     height: 100%;
     padding: 18.5px 5px;
-    background-color: var(--Slate-100-);
-    color: var(--Slate-700-);
+    background-color: var(--Slate-300-);
+    color: var(--Slate-900-);
     font-weight: 800;
     display: flex;
     align-items: center;
-    border: none;
 }
 
 .input-term {
     width: 60px;
     height: 100%;
     padding: 1rem 0.5rem;
-    background-color: var(--Slate-100-);
-    color: var(--Slate-700-);
+    background-color: var(--Slate-300-);
+    color: var(--Slate-900-);
     font-weight: 800;
     display: flex;
     align-items: center;
@@ -123,10 +122,9 @@ input[type="text"] {
     border: none;
     outline: none;
     flex: 1; 
-    background-color: transparent;
     font-weight:700;
-    color: var(--Slate-700-);
     padding: 0 5px;
+    height: 100%;
 }
 
 .input-field {
@@ -165,7 +163,7 @@ fieldset{
         background-color: var(--Lime-active-);
     }
 
-    .input-container:active,
+.input-container:active,
 .input-container:focus-within {
     border: 1px solid var(--Lime-);
 }
@@ -189,7 +187,7 @@ fieldset{
     transition: border-color 0.3s ease;
 }
 
-.radio-box input[type="radio"]:checked {
+.radio-box input[type="radio"]:checked{
     border-color: var(--Lime-);
     background-color: var(--Lime-);
 }
@@ -224,7 +222,7 @@ fieldset{
         width: 20px;
         height: 20px;
     }
-    
+
 .result-section{
     background-color: var(--Slate-900-);
     width: 50%;
@@ -236,6 +234,7 @@ fieldset{
     flex-direction: column;
     align-items: center;
     justify-content: center; 
+    text-align: center;
 }
 
 .result-section h2{
@@ -245,25 +244,30 @@ fieldset{
 
 .result-section p{
     color: var(--Slate-300-);
+    text-align: center;
 }
 
 .repaymentdisplayresult{
     background-color: var(--Slate-900-);
     width: 100%;
     height: 100%;
-    border-bottom-left-radius: 50px;  
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 20px;  
+    border-top-right-radius: 20px;    
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-items: center; 
     padding: 1rem;
+    text-align: center;
 }
 
 .repaymentdisplayresult p{
     color: var(--Slate-300-);
     margin-top: 10px;
     line-height: 1.5em;
-    word-spacing: 0.5em;
+    word-spacing: 0.1em;
+    text-align: center;
 }
 
 .repaymentdisplayresult h1{
@@ -272,6 +276,7 @@ fieldset{
     font-weight: 900;
     border-bottom: 1px solid var(--Slate-300-);
     padding: 0.3rem;
+    text-align: center;
 }
 
 #display-monthly-repayment{
@@ -287,13 +292,14 @@ fieldset{
     font-weight: 900;
     border-bottom: 1px solid var(--Slate-300-);
     padding: 0.3rem;
+    text-align: center;
 }
 
 .interestdisplayresult p{
     color: var(--Slate-300-);
     margin-top: 10px;
     line-height: 1.5em;
-    word-spacing: 0.5em;
+    word-spacing: 0.1em;
 }
 
 .interestdisplayresult{
@@ -301,11 +307,14 @@ fieldset{
     width: 100%;
     height: 100%;
     border-bottom-left-radius: 50px;  
+    border-bottom-right-radius: 20px;  
+    border-top-right-radius: 20px;    
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-items: center; 
     padding: 1rem;
+    text-align: center;
 }
 
 #display-result-heading{
@@ -322,8 +331,9 @@ fieldset{
     border-top: 5px solid var(--Lime-);
     border-radius: 10px;
     background-color: var(--Slate-1200-);
-    padding:1rem;
+    padding:0.8rem;
     margin-top: 1.5rem;
+    width: 60%;
 }
 .mortgage-amount-error,
 .mortgage-term-error,
