@@ -10,6 +10,31 @@ const mortgageTermError = document.querySelector(".mortgage-term-error");
 const interestRateError = document.querySelector(".interest-rate-error");
 const mortgageTypeError = document.querySelector(".mortgage-type-error");
 
+mortgageAmount.addEventListener("input", formatMortgageAmount);
+
+function formatMortgageAmount(event) {
+  const input = event.target;
+  const cursorPosition = input.selectionStart; // Get current cursor position
+
+  let value = input.value.replace(/[^0-9]/g, ""); // Remove non-numeric characters
+  value = value.replace(/^0+/, ""); // Remove leading zeros
+  if (value === "") value = "0"; // Ensure at least "0" is displayed
+
+  // Add commas every 3 digits
+  value = addSeparator(value, " "); // Use "," for commas or " " for spaces
+
+  // Update the input value with the formatted number
+  input.value = value;
+
+  // Restore the cursor position
+  const newCursorPosition = cursorPosition + (value.length - input.value.length);
+  input.setSelectionRange(newCursorPosition, newCursorPosition);
+}
+
+function addSeparator(number, separator) {
+  return number.replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+}
+
 calculateButton.addEventListener("click", calculateRepayment);
 
 function calculateRepayment(event) {
@@ -38,7 +63,7 @@ function calculateRepayment(event) {
       mortgageAmount,
       mortgageAmount.closest(".input-container"));
     isValid = false;
-  } else if (parseFloat(mortgageAmountValue) <= 0) {
+  } else if (parseFloat(mortgageAmountValue.replace(/[,\s]/g, "")) <= 0) {
     showError(mortgageAmountError, "Please enter a positive number.",
       mortgageAmount,
       mortgageAmount.closest(".input-container"));
@@ -106,7 +131,7 @@ function calculateRepayment(event) {
             <p>Your results are shown below based on the information you provided. To adjust the results, edit the form and click 'calculate repayments' again.</p>
             <div class="monthlypayment-div">
                 <p>Your monthly repayments</p>
-                <h1>$${monthlyRepayment.toFixed(3)}</h1>
+                <h1>$${monthlyRepayment.toFixed(2)}</h1>
                 <p>Total you'll repay over the term</p>
                 <h2 id="display-monthly-repayment">$${totalRepayment.toFixed(3)}</h2>
             </div>
@@ -129,7 +154,7 @@ function calculateRepayment(event) {
             <p>Your monthly interest</p>
             <h1>$${monthlyInterest.toFixed(3)}</h1>
             <p>Total you'll repay over the term</p>
-            <h2 id="display-monthly-repayment">$${totalInterest.toFixed(3)}</h2>
+            <h2 id="display-monthly-repayment">$${totalInterest.toFixed(2)}</h2>
         </div>
     </div>`;
   }
@@ -157,16 +182,52 @@ function calculateMortgagePayment(
 clearButton.addEventListener("click", clearValueButton);
 
 function clearValueButton() {
+  // Clear input values
   document.querySelector("#mortgage-amount").value = "";
   document.querySelector("#mortgage-term").value = "";
   document.querySelector("#interest-rate").value = "";
 
+  // Clear selected mortgage type
   const selectedMortgageType = document.querySelector(
     'input[name="mortgage-type"]:checked'
   );
   if (selectedMortgageType) {
     selectedMortgageType.checked = false;
   }
+
+  // Clear error messages
+  mortgageAmountError.textContent = "";
+  mortgageTermError.textContent = "";
+  interestRateError.textContent = "";
+  mortgageTypeError.textContent = "";
+
+  // Reset border colors for input containers and fields
+  const inputContainers = document.querySelectorAll(".input-container");
+  inputContainers.forEach(container => {
+    container.style.borderColor = ""; // Reset to default
+  });
+
+  const inputFields = document.querySelectorAll("input");
+  inputFields.forEach(input => {
+    input.style.borderColor = ""; // Reset to default
+  });
+
+  // Reset border colors for input-symbol and input-term
+  const inputSymbols = document.querySelectorAll(".input-symbol");
+  inputSymbols.forEach(symbol => {
+    symbol.style.borderColor = ""; 
+    symbol.style.background = "";
+    symbol.style.color = "";// Reset to default
+  });
+
+  const inputTerms = document.querySelectorAll(".input-term");
+  inputTerms.forEach(term => {
+    term.style.borderColor = "";
+    term.style.background = "";
+    term.style.color = ""; // Reset to default
+  });
+
+  // Hide the result section and show the default view
   displayMortgagePayment.style.display = "none";
   resultSection.style.display = "block";
 }
@@ -224,7 +285,10 @@ function showError(errorElement, message, inputElement, containerElement) {
     input.style.borderColor = ""; // Reset to default
   });
 }
-  
-  function isValidNumber(value) {
-    return !isNaN(value) && isFinite(value);
-  }
+function isValidNumber(value) {
+  // Remove commas or spaces from the value
+  const cleanedValue = value.replace(/[,\s]/g, "");
+
+  // Check if the cleaned value is a valid number
+  return !isNaN(cleanedValue) && isFinite(cleanedValue);
+}
